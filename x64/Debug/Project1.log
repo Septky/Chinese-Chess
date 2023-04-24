@@ -1,0 +1,8 @@
+﻿D:\visual studio\VS file\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(517,5): warning MSB8028: 中间目录(x64\Debug\)包含从另一个项目(Project1.vcxproj)共享的文件。   这会导致错误的清除和重新生成行为。
+  Chinese-Chess.cpp
+D:\visual studio\VS project\Project1\Chinese-Chess.cpp(112,32): warning C4244: “=”: 从“double”转换到“short”，可能丢失数据
+D:\visual studio\VS project\Project1\Chinese-Chess.cpp(113,32): warning C4244: “=”: 从“double”转换到“short”，可能丢失数据
+D:\visual studio\VS project\Project1\Chinese-Chess.cpp(148,12): warning C4244: “初始化”: 从“double”转换到“int”，可能丢失数据
+D:\visual studio\VS project\Project1\Chinese-Chess.cpp(149,12): warning C4244: “初始化”: 从“double”转换到“int”，可能丢失数据
+D:\visual studio\VS project\Project1\Chinese-Chess.cpp(206,1): warning C4326: “main”的返回类型应为“int”而非“void”
+  Project1.vcxproj -> D:\visual studio\VS project\Project1\x64\Debug\Chinese-Chess.exe

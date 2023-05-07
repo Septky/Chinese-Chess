@@ -14,8 +14,9 @@ enum Pieces //棋子
 	BEGIN,END,
 };
 
-enum Pieces redChess[] = { 車,馬,相,仕,帥,炮,兵 };                 
 enum Pieces blackChess[] = { 車,馬,象,士,将,砲,卒 };
+enum Pieces redChess[] = { 車,馬,相,仕,帥,炮,兵 };
+
 const char* ChessName[] = { "車","馬","相","仕","帥","炮","兵","象","士","将","砲","卒" };
 
 struct Chess                  //每一个棋子的属性
@@ -24,7 +25,7 @@ struct Chess                  //每一个棋子的属性
 	DWORD type;              //棋子类型，红？黑？
 	short x;
 	short y;
-	bool isRiver;           //是否过河
+	//bool isRiver;           //是否过河
 };
 struct Chess map[ROW][COL];         //游戏地图
 
@@ -35,7 +36,7 @@ struct State
 	int endr;
 	int endc;
 	int state;
-}state = { NONE,NONE,NONE,NONE,BEGIN };
+}state = { NONE,NONE,NONE,NONE,END };
 
 void show()           //打印数组
 {
@@ -73,16 +74,16 @@ void  init()          //初始化数据
 					}
 					map[i][k].id = blackChess[temp];
 				}
-				if (i == 2 && ( k == 1||k == 7 ))        //炮
+				if (i == 2 && ( k == 1||k == 7 ))        //砲
 				{
 					map[i][k].id = blackChess[5];
 				}
-				if (i == 3 && k % 2 == 0)               //兵
+				if (i == 3 && k % 2 == 0)               //卒
 				{
 					map[i][k].id = blackChess[6];
 				}
 			}
-			else                     //红棋
+			if (i >4)                 //红棋
 			{
 				map[i][k].type = RED;
 				if (i == 9)
@@ -108,7 +109,7 @@ void  init()          //初始化数据
 					map[i][k].id = redChess[6];
 				}
 			}
-			map[i][k].isRiver = false;
+			//map[i][k].isriver = false;
 			map[i][k].x = k * GRID_SIZE + INTERVAL;
 			map[i][k].y = i * GRID_SIZE + INTERVAL;
 		}
@@ -147,6 +148,7 @@ void mouseEvent()                          //鼠标操作
 			
 			int col = (msg.x - INTERVAL) / GRID_SIZE;    //通过鼠标坐标得出点击的数组下标
 			int row = (msg.y - INTERVAL) / GRID_SIZE;    //k * GRID_SIZE + INTERVAL = x
+
 			if (msg.x > map[row][col].x + 28 && msg.y < map[row][col].y + 28)    //下标校准
 			{
 				col++;
@@ -181,9 +183,13 @@ void chessMove()                //移动棋子
 {
 	//bool canMove = false;
 	//什么情况下能够移动棋子                       
-	//if (!(state.begr == state.endr && state.begc == state.endc))
+	//if (//!(state.begr == state.endr && state.begc == state.endc)
+		 //state.endr!=-1&& state.begr!=-1&&
+		//map[state.begr][state.begc].id!=NONE&&
+		//map[state.endr][state.endc].type!= map[state.endr][state.endc].type
+		//)
 	//{
-		bool canMove = true;
+		//bool canMove = true;
 		int a = state.begr;
 		state.begr = state.endr;
 		state.endr = a;
@@ -195,7 +201,7 @@ void chessMove()                //移动棋子
 		map[state.endr][state.endc].id = map[state.begr][state.begc].id;
 		//map[state.endr][state.endc].isRiver = map[state.begr][state.begc].isRiver;
 		map[state.endr][state.endc].type = map[state.begr][state.begc].type;
-		map[state.begr][state.begc].id = NONE;		
+		map[state.begr][state.begc].id = NONE;
 
 		printf("canMove\n");
 	//}
